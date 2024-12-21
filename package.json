@@ -1,0 +1,13 @@
+{
+  "name": "santa-tracker-mqtt",
+  "version": "1.0.0",
+  "description": "Santa Tracker interface listening to TeslaMate's MQTT updates, sending them over Supabase to be used with Realtime features.",
+  "main": "index.js",
+  "author": "Anatoli Nicolae <an@thundersquared.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.47.10",
+    "dotenv": "^16.4.7",
+    "mqtt": "^5.10.3"
+  }
+}
