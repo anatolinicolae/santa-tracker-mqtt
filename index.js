@@ -71,7 +71,8 @@ client.on('message', async (topic, message) => {
                         latitude: locationData.latitude,
                         longitude: locationData.longitude,
                     }
-                ]);
+                ])
+                .select();
 
             if (locationError) {
                 console.error('Error inserting location:', locationError);
