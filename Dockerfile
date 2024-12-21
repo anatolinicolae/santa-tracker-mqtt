@@ -3,13 +3,14 @@ FROM node:lts-alpine
 WORKDIR /app
 
 # Copy package files
-COPY package*.json ./
+COPY package.json .
+COPY yarn.lock .
 
 # Install dependencies
-RUN npm ci --only=production
+RUN yarn install --frozen-lockfile --production
 
 # Copy application code
-COPY . .
+COPY index.js .
 
 # Start the application
 CMD ["node", "index.js"]
