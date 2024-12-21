@@ -31,13 +31,8 @@ const client = mqtt.connect(`mqtt://${mqttConfig.host}:${mqttConfig.port}`, {
 async function updateSetting(key, value) {
     const { error } = await supabase
         .from('settings')
-        .upsert(
-            { key, value: String(value) },
-            { 
-                onConflict: 'key',
-                returning: true 
-            }
-        );
+        .upsert({ key, value: String(value) })
+        .select();
 
     if (error) {
         console.error(`Error updating ${key}:`, error);
