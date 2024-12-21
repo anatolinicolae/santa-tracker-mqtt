@@ -31,8 +31,8 @@ const client = mqtt.connect(`mqtt://${mqttConfig.host}:${mqttConfig.port}`, {
 async function updateSetting(key, value) {
     const { error } = await supabase
         .from('settings')
-        .upsert({ key, value: String(value) })
-        .select();
+        .update({ value: String(value) })
+        .eq('key', key);
 
     if (error) {
         console.error(`Error updating ${key}:`, error);
@@ -65,7 +65,7 @@ client.on('message', async (topic, message) => {
             const locationData = JSON.parse(messageData);
             
             const { error: locationError } = await supabase
-                .from('santa_locations')
+                .from('santa_positions')
                 .insert([
                     {
                         latitude: locationData.latitude,
