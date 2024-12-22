@@ -18,6 +18,7 @@ const mqttConfig = {
 const carId = process.env.CAR_ID || '1';
 const topics = [
     `teslamate/cars/${carId}/location`,
+    `teslamate/cars/${carId}/heading`,
     `teslamate/cars/${carId}/power`,
     `teslamate/cars/${carId}/state`,
     `teslamate/cars/${carId}/speed`
@@ -82,6 +83,9 @@ client.on('message', async (topic, message) => {
 
             console.log('Location saved successfully');
         } 
+        else if (topic.endsWith('/heading')) {
+            await updateSetting('heading', messageData);
+        }
         else if (topic.endsWith('/power')) {
             await updateSetting('power', messageData);
         }
